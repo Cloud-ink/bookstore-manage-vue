@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, logout, getInfo } from '@/api/admin'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
@@ -24,15 +24,18 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_ROLE: (state, role) => {
+    state.role = role
   }
 }
 
 const actions = {
   // user login
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
+    const { adminName, adminPassword } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
+      login({ adminName: adminName.trim(), adminPassword: adminPassword }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
@@ -53,10 +56,13 @@ const actions = {
           return reject('Verification failed, please Login again.')
         }
 
-        const { name, avatar } = data
+        const name = data.userInfo.adminName
+        const avatar = data.userInfo.adminAvatar
+        const role = data.userInfo.adminRole
 
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
+        commit('SET_ROLE', role)
         resolve(data)
       }).catch(error => {
         reject(error)

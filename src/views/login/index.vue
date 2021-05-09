@@ -3,35 +3,35 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">BookStore后台管理系统</h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="adminName">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
+          ref="adminName"
+          v-model="loginForm.adminName"
+          placeholder="adminName"
+          name="adminName"
           type="text"
           tabindex="1"
-          auto-complete="on"
+          autocomplete="on"
         />
       </el-form-item>
 
-      <el-form-item prop="password">
+      <el-form-item prop="adminPassword">
         <span class="svg-container">
-          <svg-icon icon-class="password" />
+          <svg-icon icon-class="admin_password" />
         </span>
         <el-input
           :key="passwordType"
-          ref="password"
-          v-model="loginForm.password"
+          ref="adminPassword"
+          v-model="loginForm.adminPassword"
           :type="passwordType"
-          placeholder="Password"
-          name="password"
+          placeholder="adminPassword"
+          name="adminPassword"
           tabindex="2"
           auto-complete="on"
           @keyup.enter.native="handleLogin"
@@ -41,12 +41,9 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
-      </div>
+      <el-button :loading="loading" type="primary" 
+      style="width:100%;margin-bottom:30px;" 
+      @click.native.prevent="handleLogin">登录</el-button>
 
     </el-form>
   </div>
@@ -66,7 +63,7 @@ export default {
       }
     }
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
+      if (value.length < 3) {
         callback(new Error('The password can not be less than 6 digits'))
       } else {
         callback()
@@ -74,12 +71,12 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        adminName: 'admin',
+        adminPassword: '1234'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        adminName: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        adminPassword: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       loading: false,
       passwordType: 'password',

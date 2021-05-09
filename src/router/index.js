@@ -3,33 +3,8 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-/* Layout */
 import Layout from '@/layout'
 
-/**
- * Note: sub-menu only appear when route children.length >= 1
- * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
- *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu
- *                                if not set alwaysShow, when item has more than one children route,
- *                                it will becomes nested mode, otherwise not show the root menu
- * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
- * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
-    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
-    icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
-    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
-    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
-  }
- */
-
-/**
- * constantRoutes
- * a base page that does not have permission requirements
- * all roles can be accessed
- */
 export const constantRoutes = [
   {
     path: '/login',
@@ -51,16 +26,45 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
   },
 
   {
-    path: '/example',
+    path: '/user',
+    component: Layout,
+    redirect: '/user/list',
+    name: 'Example',
+    meta: { title: '用户管理', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'list',
+        name: 'user',
+        component: () => import('@/views/user/index'),
+        meta: { title: '用户信息', icon: 'table' }
+      },
+      {
+        path: 'add',
+        name: 'addUser',
+        component: () => import('@/views/user/add'),
+        meta: { title: '添加用户', icon: 'tree' }
+      },
+      {
+        path: 'edit/:id',//:动态
+        name: 'addUser',
+        component: () => import('@/views/user/add'),
+        meta: { title: '添加用户', icon: 'tree' },
+        hidden: true //隐藏
+      }
+    ]
+  },
+
+  {
+    path: '/corousel',
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    meta: { title: '广告管理', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'table',
@@ -78,14 +82,52 @@ export const constantRoutes = [
   },
 
   {
-    path: '/form',
+    path: '/product',
     component: Layout,
+    redirect: '/product/list',
+    name: 'productList',
+    meta: { title: '商品管理', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        path: 'list',
+        name: 'productList',
+        component: () => import('@/views/product/list'),
+        meta: { title: '商品列表', icon: 'table' }
+      },
+      {
+        path: 'form',
+        name: 'addProduct',
+        component: () => import('@/views/product/form'),
+        meta: { title: '添加商品', icon: 'tree' }
+      },
+      {
+        path: 'edit/:id',//:动态
+        name: 'editProduct',
+        component: () => import('@/views/product/form'),
+        meta: { title: '更新商品', icon: 'tree' },
+        hidden: true //隐藏
+      }
+    ]
+  },
+
+  {
+    path: '/manager',
+    component: Layout,
+    redirect: '/example/table',
+    name: 'Example',
+    meta: { title: '管理员信息', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Table', icon: 'table' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: 'Tree', icon: 'tree' }
       }
     ]
   },
@@ -145,17 +187,6 @@ export const constantRoutes = [
         component: () => import('@/views/nested/menu2/index'),
         name: 'Menu2',
         meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
       }
     ]
   },
