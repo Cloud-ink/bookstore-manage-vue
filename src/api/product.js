@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/user/list',
+    url: '/product/list',
     method: 'get',
     params: query
   })
@@ -11,7 +11,7 @@ export function fetchList(query) {
 //分页查询
 export function fetchListPage(page, limit, query) {
   return request({
-    url: `user/list/${page}/${limit}`,//反引号
+    url: `product/list/${page}/${limit}`,//反引号
     method: 'get',
     params: query
   })
@@ -19,7 +19,7 @@ export function fetchListPage(page, limit, query) {
 
 export function filterList(query) {
   return request({
-    url: '/user/filterList',
+    url: '/product/filterList',
     method: 'get',
     params: query
   })
@@ -27,7 +27,7 @@ export function filterList(query) {
 
 export function fetchArticle(id) {
   return request({
-    url: '/user/detail',
+    url: '/product/detail',
     method: 'get',
     params: { id }
   })
@@ -35,7 +35,7 @@ export function fetchArticle(id) {
 
 export function fetchPv(pv) {
   return request({
-    url: '/user/pv',
+    url: '/product/pv',
     method: 'get',
     params: { pv }
   })
@@ -44,7 +44,7 @@ export function fetchPv(pv) {
 //添加
 export function saveUser(data) {
   return request({
-    url: '/user/save',
+    url: '/product/save',
     method: 'post',
     data
   })
@@ -52,14 +52,14 @@ export function saveUser(data) {
 
 export function getById(id){
   return request({
-    url: `/user/get/${id}`,
+    url: `/product/get/${id}`,
     method: 'get'
   })
 }
 
 export function updateById(data) {
   return request({
-    url: '/user/update',
+    url: '/product/update',
     method: 'put',
     data
   })
@@ -68,7 +68,7 @@ export function updateById(data) {
 //删除
 export function deleteById(id) {
   return request({
-    url: `/user/delete/${id}`,
+    url: `/product/delete/${id}`,
     method: 'delete',
   })
 }

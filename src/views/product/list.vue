@@ -11,10 +11,10 @@
           value-key="product_name"
         ></el-autocomplete>
       </el-form-item>
-      <el-form-item label="用户号码">
+      <el-form-item label="商品状态">
         <el-input v-model="listQuery.product" placeholder="号码" style="width: 100px"></el-input>
       </el-form-item>
-      <el-form-item label="用户性别">
+      <el-form-item label="商品分类">
         <el-select v-model="listQuery.product" clearable placeholder="性别" style="width: 80px">
           <el-option label="男" value="1"></el-option>
           <el-option label="女" value="0"></el-option>
@@ -61,23 +61,23 @@
           <span>{{ row.productName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="用户号码" width="110px" align="center">
+      <el-table-column label="商品简介" width="110px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.product }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="用户性别" width="110px" align="center">
+      <el-table-column label="商品类别" width="110px" align="center">
         <template slot-scope="{row}">
           <el-tag v-if="row.product === 1" type="success">男</el-tag>
           <el-tag v-if="row.product === 0" type="success">女</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="用户邮箱" width="110px" align="center">
+      <el-table-column label="商品详情" width="110px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.product }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="用户地址" width="110px" align="center">
+      <el-table-column label="商品状态" width="110px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.product }}</span>
         </template>
